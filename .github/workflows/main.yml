@@ -10,7 +10,14 @@ jobs:
     steps:
       - name: Eslint
         uses: actions/checkout@v2
+      - name: Setup Node
         uses: actions/setup-node@v1.4.4
+        with:
+          node-version: 12
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
   build:
     runs-on: ubuntu-latest
     steps:
