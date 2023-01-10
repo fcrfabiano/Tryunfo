@@ -21,9 +21,7 @@ jobs:
 
       - name: Rodando Eslint
         uses: mrdivyansh/eslint-action@v1.0.7
-        with:
-          repo-token: ${{ secrets.SERVER_SSH_KEY }}
-          eslint-rc: .eslintrc.json
+        run: npm lint
 
       - name: Rodando Testes
         run: npm test
