@@ -24,8 +24,6 @@ jobs:
         with:
           repo-token: ${{ secrets.SERVER_SSH_KEY }}
           eslint-rc: .eslintrc.json
-          execute-on-files:
-            - ./packages
 
       - name: Rodando Testes
         run: npm test
