@@ -5,23 +5,31 @@ on:
       - main
 
 jobs:
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Eslint
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v1.4.4
-        with:
-          node-version: 12
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do Repositório
-        uses: actions/checkout@v2
-      - name: Deploy para meu hosting
-        uses: easingthemes/ssh-deploy@main
+      - name: Checkout do Projeto
+        uses: actions/checkout@v3
+
+      - name: Setup do Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Instalando Dependências
+        run: npm install
+
+      - name: Rodando Eslint
+        uses: mrdivyansh/eslint-action@v1.0.7
+        with:
+          repo-token: ${{ secrets.SERVER_SSH_KEY }}
+          eslint-rc: .eslintrc.json
+          execute-on-files:
+            - ./packages
+
+      - name: Rodando Testes
+        run: npm test
+
+      - name: Build do Projeto
+        run: npm build
+
