@@ -20,7 +20,7 @@ jobs:
         run: npm install
 
       - name: Rodando Eslint
-        uses: mrdivyansh/eslint-action@v1.0.7
+        run: npx eslint .
 
       - name: Rodando Testes
         run: npm test
